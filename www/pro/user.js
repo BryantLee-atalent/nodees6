@@ -12,13 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 router.get('/', function (req, res) {
-    var db = new _dbconnect.db_mysql();
-    db.connStart();
-    db.connExec('select * from user', function ($scope) {
-        db.connEnd();
-        var user = db.result;
-        res.send(user);
-    });
+    var db = new _dbconnect.db_mysql('select * from user');
+
+    res.send(JSON.parse(db).name);
 });
 
 module.exports = router;

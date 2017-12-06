@@ -1,28 +1,28 @@
 import mysql from 'mysql'
 
-export class db_mysql {
-    constructor() {
-        this.dbConn = mysql.createConnection({
+export function db_mysql(query) {
+    const promise = new Promise(function (resolve, reject) {
+        const conn = mysql.createConnection({
             host     : '118.126.109.20',
             user     : 'bryant',
             password : 'leekobe24',
             database: 'wechat'
         });
-    }
 
-    connStart() {
-        this.dbConn.connect();
-    }
-
-    connExec(query) {
-        const me = this;
-        me.dbConn.query(query, function(err, rows, fields) {
+        conn.connect();
+        conn.query(query, function(err, result) {
             if (err) throw err;
-            me.result = rows;
+            resolve(JSON.stringify(result));
+            conn.end();
         });
-    }
+    });
 
-    connEnd() {
-        this.dbConn.end();
-    }
+    promise.then(function (value) {
+        // success
+        console.log(value);
+        return value;
+    }, function (value) {
+        // fail
+    });
+    return promise;
 }
