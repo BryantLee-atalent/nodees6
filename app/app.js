@@ -10,15 +10,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
 app.use(cookieParser());
-
-app.use('/',user);
-
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
+// 设置跨域访问
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
@@ -28,5 +20,12 @@ app.all('*', function(req, res, next) {
     else  next();
 });
 
+app.use('/',user);
+
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
 app.listen(8080);

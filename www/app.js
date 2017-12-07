@@ -32,15 +32,7 @@ app.use((0, _morgan2.default)('dev'));
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use((0, _cookieParser2.default)());
-
-app.use('/', _user2.default);
-
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
+// 设置跨域访问
 app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
@@ -48,6 +40,14 @@ app.all('*', function (req, res, next) {
     res.header("X-Powered-By", ' 3.2.1');
     if (req.method == "OPTIONS") res.send(200); /*让options请求快速返回*/
     else next();
+});
+
+app.use('/', _user2.default);
+
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 app.listen(8080);
