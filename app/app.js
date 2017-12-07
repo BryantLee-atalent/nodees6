@@ -7,6 +7,8 @@ import favicon from 'serve-favicon';
 let app = express();
 
 app.use(logger('dev'));
+app.use(bodyParser.raw());
+app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
 app.use(cookieParser());
@@ -28,4 +30,4 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(8080);
+app.listen(3000);
