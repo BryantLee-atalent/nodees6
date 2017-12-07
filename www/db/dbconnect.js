@@ -12,6 +12,8 @@ var _mysql2 = _interopRequireDefault(_mysql);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function db_mysql(query) {
+    var me = this;
+    var data = void 0;
     var promise = new Promise(function (resolve, reject) {
         var conn = _mysql2.default.createConnection({
             host: '118.126.109.20',
@@ -23,14 +25,13 @@ function db_mysql(query) {
         conn.connect();
         conn.query(query, function (err, result) {
             if (err) throw err;
-            resolve(JSON.stringify(result));
+            resolve(result);
             conn.end();
         });
     });
 
     promise.then(function (value) {
         // success
-        console.log(value);
         return value;
     }, function (value) {
         // fail
