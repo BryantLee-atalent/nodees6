@@ -18,7 +18,12 @@ let router = express.Router();
     });
 
     router.post('/', (req, res)=> {
-        res.send(req.body.user_name);
+        const data = {
+            'user_name': req.body.user_name,
+            'user_pwd':req.body.user_pwd,
+            'handler': req.body.handler
+        }
+        res.send(data);
     });
 
 module.exports = router;

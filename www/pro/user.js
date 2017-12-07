@@ -25,7 +25,12 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    res.send(req.body.user_name);
+    var data = {
+        'user_name': req.body.user_name,
+        'user_pwd': req.body.user_pwd,
+        'handler': req.body.handler
+    };
+    res.send(data);
 });
 
 module.exports = router;
