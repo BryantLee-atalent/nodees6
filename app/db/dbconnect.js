@@ -8,7 +8,7 @@ export function db_mysql(query) {
             user: 'bryant',
             password: 'leekobe24',
             database: 'wechat',
-            multipleStatements: true
+            port: 3306
         });
 
         conn.connect();

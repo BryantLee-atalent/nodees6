@@ -45,7 +45,7 @@ router.post('/', function (req, res) {
         query = 'insert into ';
     } else if (data.handler === 2) {
         // login
-        query = 'select * from user where user_phone=' + data.user_name + ' and user_pwd = ' + data.user_pwd;
+        query = 'select * from user where user_phone = \'' + data.user_name + '\' and user_pwd = \'' + data.user_pwd + '\'';
     } else if (data.handler === 3) {
         //update
         query = 'update user set user_name = ' + data.user_name + ', user_pwd = ' + data.user_pwd + ', user_role = ' + data.role + 'where user_id =' + data.user_id;
