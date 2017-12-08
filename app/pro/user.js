@@ -34,10 +34,13 @@ router.get('/:page', (req, res) => {
 router.post('/', (req, res) => {
     const data = req.body;
     let query = '';
+    let query2 = '';
     if (data.handler === 1){//add
         query = 'insert into '
     }else if(data.handler ===2){// login
         query = 'select * from user where user_phone = \'' + data.user_name +'\' and user_pwd = \'' + data.user_pwd + '\'';
+        query2 = 'update user set login_time = NOW() where user_id = '
+
     }else if (data.handler ===3) {//update
         query = 'update user set user_name = ' + data.user_name + ', user_pwd = ' +data.user_pwd + ', user_role = ' + data.role + 'where user_id =' + data.user_id
 
@@ -50,9 +53,25 @@ router.post('/', (req, res) => {
     });
 
     promise.then((value) => {
-        let values = JSON.stringify(value);
-        values = JSON.parse(values);
-        res.send(values);
+        if (query2) {
+            const promise2 = new Promise((resolve, reject) => {
+                // str += 'select count(1) from user'
+                const str = query2 + value[0].user_id;
+                console.log(value);
+                let dbc = db_mysql(str);
+
+                resolve(dbc);
+            });
+            promise2.then((value2)=>{
+                let values = JSON.stringify(value);
+                values = JSON.parse(values);
+                res.send(values);
+            });
+        }else {
+            let values = JSON.stringify(value);
+            values = JSON.parse(values);
+            res.send(values);
+        }
     });
 });
 

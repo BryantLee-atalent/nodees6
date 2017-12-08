@@ -40,12 +40,14 @@ router.get('/:page', function (req, res) {
 router.post('/', function (req, res) {
     var data = req.body;
     var query = '';
+    var query2 = '';
     if (data.handler === 1) {
         //add
         query = 'insert into ';
     } else if (data.handler === 2) {
         // login
         query = 'select * from user where user_phone = \'' + data.user_name + '\' and user_pwd = \'' + data.user_pwd + '\'';
+        query2 = 'update user set login_time = NOW() where user_id = ';
     } else if (data.handler === 3) {
         //update
         query = 'update user set user_name = ' + data.user_name + ', user_pwd = ' + data.user_pwd + ', user_role = ' + data.role + 'where user_id =' + data.user_id;
@@ -59,9 +61,25 @@ router.post('/', function (req, res) {
     });
 
     promise.then(function (value) {
-        var values = JSON.stringify(value);
-        values = JSON.parse(values);
-        res.send(values);
+        if (query2) {
+            var promise2 = new Promise(function (resolve, reject) {
+                // str += 'select count(1) from user'
+                var str = query2 + value[0].user_id;
+                console.log(value);
+                var dbc = (0, _dbconnect.db_mysql)(str);
+
+                resolve(dbc);
+            });
+            promise2.then(function (value2) {
+                var values = JSON.stringify(value);
+                values = JSON.parse(values);
+                res.send(values);
+            });
+        } else {
+            var values = JSON.stringify(value);
+            values = JSON.parse(values);
+            res.send(values);
+        }
     });
 });
 
