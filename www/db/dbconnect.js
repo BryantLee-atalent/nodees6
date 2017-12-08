@@ -19,7 +19,8 @@ function db_mysql(query) {
             host: '118.126.109.20',
             user: 'bryant',
             password: 'leekobe24',
-            database: 'wechat'
+            database: 'wechat',
+            multipleStatements: true
         });
 
         conn.connect();

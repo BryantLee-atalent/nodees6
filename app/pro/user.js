@@ -6,22 +6,26 @@ import {db_mysql} from '../db/dbconnect';
 let router = express.Router();
 
 // GET HTTPS
-router.get('/', (req, res) => {
+router.get('/:page', (req, res) => {
     const promise = new Promise((resolve, reject) => {
-        var str = 'SELECT * FROM notice limit 20 offset ' + 20 * (req.body.page - 1);
-        let db = JSON.stringify(db_mysql('select * from user'));
-        db =JSON.parse(db);
-        let dbcount = db_mysql('select count(1) from user');
-        const data = {
-            data: db,
-            count: dbcount
+        const page = req.params.page;
+        var str = 'SELECT * FROM user limit 20 offset ' + 20 * (page - 1);
 
-        }
-        resolve(data);
+        let db = db_mysql(str);
+        resolve(db);
     });
 
     promise.then((value) => {
-        res.send(value);
+        const promise2 = new Promise((resolve, reject) => {
+            // str += 'select count(1) from user'
+            const str = 'select count(1) as count from user';
+            let dbc = db_mysql(str);
+
+            resolve(dbc);
+        });
+        promise2.then((values)=>{
+            res.send({data: value, count: values[0].count});
+        });
     });
 });
 
@@ -41,7 +45,7 @@ router.post('/', (req, res) => {
         query = 'delete from user where user_id =' + data.user_id
     }
     const promise = new Promise((resolve, reject) => {
-        let db = db_mysql('select * from user');
+        let db = db_mysql(query);
         resolve(db);
     });
 

@@ -5,14 +5,15 @@ export function db_mysql(query) {
     let data;
     const promise = new Promise(function (resolve, reject) {
         const conn = mysql.createConnection({
-            host     : '118.126.109.20',
-            user     : 'bryant',
-            password : 'leekobe24',
-            database: 'wechat'
+            host: '118.126.109.20',
+            user: 'bryant',
+            password: 'leekobe24',
+            database: 'wechat',
+            multipleStatements: true
         });
 
         conn.connect();
-        conn.query(query, function(err, result) {
+        conn.query(query, function (err, result) {
             if (err) throw err;
             resolve(result);
             conn.end();
@@ -21,7 +22,7 @@ export function db_mysql(query) {
 
     promise.then(function (value) {
         // success
-        return  value;
+        return value;
     }, function (value) {
         // fail
     });

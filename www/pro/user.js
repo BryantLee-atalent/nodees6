@@ -13,22 +13,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 // GET HTTPS
-router.get('/', function (req, res) {
+router.get('/:page', function (req, res) {
     var promise = new Promise(function (resolve, reject) {
-        var str = 'SELECT * FROM notice limit 20 offset ' + 20 * (req.body.page - 1);
-        var db = JSON.stringify((0, _dbconnect.db_mysql)('select * from user'));
-        db = JSON.parse(db);
-        var dbcount = (0, _dbconnect.db_mysql)('select count(1) from user');
-        var data = {
-            data: db,
-            count: dbcount
+        var page = req.params.page;
+        var str = 'SELECT * FROM user limit 20 offset ' + 20 * (page - 1);
 
-        };
-        resolve(data);
+        var db = (0, _dbconnect.db_mysql)(str);
+        resolve(db);
     });
 
     promise.then(function (value) {
-        res.send(value);
+        var promise2 = new Promise(function (resolve, reject) {
+            // str += 'select count(1) from user'
+            var str = 'select count(1) as count from user';
+            var dbc = (0, _dbconnect.db_mysql)(str);
+
+            resolve(dbc);
+        });
+        promise2.then(function (values) {
+            res.send({ data: value, count: values[0].count });
+        });
     });
 });
 
@@ -50,7 +54,7 @@ router.post('/', function (req, res) {
         query = 'delete from user where user_id =' + data.user_id;
     }
     var promise = new Promise(function (resolve, reject) {
-        var db = (0, _dbconnect.db_mysql)('select * from user');
+        var db = (0, _dbconnect.db_mysql)(query);
         resolve(db);
     });
 
