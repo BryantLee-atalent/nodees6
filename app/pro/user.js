@@ -8,14 +8,20 @@ let router = express.Router();
 // GET HTTPS
 router.get('/', (req, res) => {
     const promise = new Promise((resolve, reject) => {
-        let db = db_mysql('select * from user');
-        resolve(db);
+        var str = 'SELECT * FROM notice limit 20 offset ' + 20 * (req.body.page - 1);
+        let db = JSON.stringify(db_mysql('select * from user'));
+        db =JSON.parse(db);
+        let dbcount = db_mysql('select count(1) from user');
+        const data = {
+            data: db,
+            count: dbcount
+
+        }
+        resolve(data);
     });
 
     promise.then((value) => {
-        let values = JSON.stringify(value);
-        values = JSON.parse(values)
-        res.send(values);
+        res.send(value);
     });
 });
 

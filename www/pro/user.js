@@ -15,14 +15,20 @@ var router = _express2.default.Router();
 // GET HTTPS
 router.get('/', function (req, res) {
     var promise = new Promise(function (resolve, reject) {
-        var db = (0, _dbconnect.db_mysql)('select * from user');
-        resolve(db);
+        var str = 'SELECT * FROM notice limit 20 offset ' + 20 * (req.body.page - 1);
+        var db = JSON.stringify((0, _dbconnect.db_mysql)('select * from user'));
+        db = JSON.parse(db);
+        var dbcount = (0, _dbconnect.db_mysql)('select count(1) from user');
+        var data = {
+            data: db,
+            count: dbcount
+
+        };
+        resolve(data);
     });
 
     promise.then(function (value) {
-        var values = JSON.stringify(value);
-        values = JSON.parse(values);
-        res.send(values);
+        res.send(value);
     });
 });
 
