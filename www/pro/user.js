@@ -61,9 +61,9 @@ router.post('/', function (req, res) {
     promise.then(function (value) {
         var values = JSON.stringify(value);
         values = JSON.parse(values);
+        res.send('success!');
         res.send(values);
     });
-    res.send(req.body);
 });
 
 module.exports = router;

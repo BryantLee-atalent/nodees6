@@ -51,10 +51,10 @@ router.post('/', (req, res) => {
 
     promise.then((value) => {
         let values = JSON.stringify(value);
-        values = JSON.parse(values)
+        values = JSON.parse(values);
+        res.send('success!')
         res.send(values);
     });
-    res.send(req.body);
 });
 
 module.exports = router;

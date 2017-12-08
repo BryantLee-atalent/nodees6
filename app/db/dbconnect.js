@@ -13,7 +13,7 @@ export function db_mysql(query) {
         });
 
         conn.connect();
-        conn.query(query, function (err, result) {
+        conn.query(query, function (err, result, fields) {
             if (err) throw err;
             resolve(result);
             conn.end();
