@@ -13,7 +13,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function db_mysql(query) {
     var me = this;
-    var data = void 0;
     var promise = new Promise(function (resolve, reject) {
         var conn = _mysql2.default.createConnection({
             host: '118.126.109.20',

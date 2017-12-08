@@ -62,7 +62,7 @@ router.post('/', function (req, res) {
         var values = JSON.stringify(value);
         values = JSON.parse(values);
         res.send('success!');
-        res.send(values);
+        //   res.send(values);
     });
 });
 

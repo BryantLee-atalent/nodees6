@@ -2,7 +2,6 @@ import mysql from 'mysql'
 
 export function db_mysql(query) {
     const me = this;
-    let data;
     const promise = new Promise(function (resolve, reject) {
         const conn = mysql.createConnection({
             host: '118.126.109.20',
