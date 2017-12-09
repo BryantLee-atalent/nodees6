@@ -23,7 +23,7 @@ app.all('*', function(req, res, next) {
     else  next();
 });
 
-app.use('/',user);
+app.use('/user',user);
 app.use('/mechanism',mechanism);
 
 app.use(function(req, res, next) {

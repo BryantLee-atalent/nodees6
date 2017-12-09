@@ -48,7 +48,7 @@ app.all('*', function (req, res, next) {
     else next();
 });
 
-app.use('/', _user2.default);
+app.use('/user', _user2.default);
 app.use('/mechanism', _mechanism2.default);
 
 app.use(function (req, res, next) {

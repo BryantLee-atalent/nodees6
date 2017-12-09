@@ -10,7 +10,7 @@ var router = _express2.default.Router();
 
 // https get
 router.get('/', function (req, res) {
-    res.send('adasd');
+  res.send('adasd');
 });
 
 module.exports = router;
