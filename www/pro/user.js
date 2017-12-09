@@ -41,17 +41,24 @@ router.post('/', function (req, res) {
     var query2 = '';
     if (data.handler === 1) {
         //add
-        query = 'insert into  user (user_name, user_pwd, user_phone, user_role) values ( \' ' + data.user_name + '\', \'123456\', \'' + data.user_phone + '\',1)';
+        query = 'insert into  user (user_name, user_pwd, user_phone, user_role) values ( \'' + data.user_name + '\', \'123456\', \'' + data.user_phone + '\',1)';
     } else if (data.handler === 2) {
         // login
         query = 'select * from user where user_phone = \'' + data.user_name + '\' and user_pwd = \'' + data.user_pwd + '\'';
         query2 = 'update user set login_time = NOW() where user_id = ';
     } else if (data.handler === 3) {
         //update
-        query = 'update user set user_name = ' + data.user_name + ', user_pwd = ' + data.user_pwd + ', user_role = ' + data.role + 'where user_id =' + data.user_id;
+        query = 'update user set user_name = \'' + data.user_name + '\' where user_id =' + data.user_id;
     } else if (data.handler === 4) {
         // search
-        query = 'select * from user where user_name = \'' + data.user_name + '\' or user_phone = \'' + data.user_name + ' \'';
+        if (data.user_name === '') {
+            query = 'select * from user';
+        } else {
+            query = 'select * from user where user_name like \'%' + data.user_name + '%\' or user_phone like \'%' + data.user_name + ' %\'';
+        }
+    } else if (data.handler === 5) {
+        //pwd
+        query = 'update user set user_pwd = \'123456\' where user_id = ' + data.user_id;
     } else {
         // delete
         query = 'delete from user where user_id =' + data.user_id;
