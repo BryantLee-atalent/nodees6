@@ -15,10 +15,10 @@ router.post('/', (req, res) => {
     const data = req.body.imageData;
     const str = 'update index_image set image_handler = 0';
     db_mysql(str).then((value)=> {
-            const addStr = 'insert into index_image (image_src, image_handler) values( \' '+  data +'\', 1)';
-            db_mysql(addStr).then((value2)=> {
-                res.send(value2);
-            });
+        const addStr = 'insert into index_image (image_src, image_handler) values( \' '+  data +'\', 1)';
+        db_mysql(addStr).then((value2)=> {
+            res.send(value2);
+        });
     });
 });
 

@@ -12,6 +12,26 @@ var _mechanism = require('./pro/mechanism');
 
 var _mechanism2 = _interopRequireDefault(_mechanism);
 
+var _form = require('./pro/form');
+
+var _form2 = _interopRequireDefault(_form);
+
+var _index = require('./pro/index');
+
+var _index2 = _interopRequireDefault(_index);
+
+var _smallform = require('./pro/smallform');
+
+var _smallform2 = _interopRequireDefault(_smallform);
+
+var _signup = require('./pro/signup');
+
+var _signup2 = _interopRequireDefault(_signup);
+
+var _selection = require('./pro/selection');
+
+var _selection2 = _interopRequireDefault(_selection);
+
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -49,7 +69,12 @@ app.all('*', function (req, res, next) {
 });
 
 app.use('/user', _user2.default);
+app.use('/index', _index2.default);
 app.use('/mechanism', _mechanism2.default);
+app.use('/form', _form2.default);
+app.use('/smallform', _smallform2.default);
+app.use('/signup', _signup2.default);
+app.use('/selection', _selection2.default);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

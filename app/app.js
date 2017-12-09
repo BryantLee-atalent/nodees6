@@ -1,6 +1,13 @@
 import express from 'express';
+
 import user from './pro/user';
 import mechanism from './pro/mechanism';
+import form from './pro/form';
+import index from './pro/index';
+import smallform from './pro/smallform';
+import signup from './pro/signup';
+import selection from './pro/selection';
+
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
@@ -24,7 +31,12 @@ app.all('*', function(req, res, next) {
 });
 
 app.use('/user',user);
+app.use('/index',index);
 app.use('/mechanism',mechanism);
+app.use('/form',form);
+app.use('/smallform',smallform);
+app.use('/signup',signup);
+app.use('/selection',selection);
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
