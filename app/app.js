@@ -24,7 +24,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.use('/',user);
-// app.use('/mechanism',mechanism);
+app.use('/mechanism',mechanism);
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

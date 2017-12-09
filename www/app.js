@@ -49,7 +49,7 @@ app.all('*', function (req, res, next) {
 });
 
 app.use('/', _user2.default);
-// app.use('/mechanism',mechanism);
+app.use('/mechanism', _mechanism2.default);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
