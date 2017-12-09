@@ -54,7 +54,7 @@ router.post('/', function (req, res) {
         if (data.user_name === '') {
             query = 'select * from user';
         } else {
-            query = 'select * from user where user_name like \'%' + data.user_name + '%\' or user_phone like \'%' + data.user_name + ' %\'';
+            query = 'select * from user where user_name like \'%' + data.user_name + '%\' or user_phone like \'%' + data.user_name + '%\'';
         }
     } else if (data.handler === 5) {
         //pwd
