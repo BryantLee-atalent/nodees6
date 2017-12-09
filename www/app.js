@@ -8,6 +8,10 @@ var _user = require('./pro/user');
 
 var _user2 = _interopRequireDefault(_user);
 
+var _mechanism = require('./pro/mechanism');
+
+var _mechanism2 = _interopRequireDefault(_mechanism);
+
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -45,6 +49,7 @@ app.all('*', function (req, res, next) {
 });
 
 app.use('/', _user2.default);
+app.use('/mechanism', _mechanism2.default);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

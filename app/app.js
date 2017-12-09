@@ -1,5 +1,6 @@
 import express from 'express';
 import user from './pro/user';
+import mechanism from './pro/mechanism';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
@@ -23,6 +24,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.use('/',user);
+app.use('/mechanism',mechanism);
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

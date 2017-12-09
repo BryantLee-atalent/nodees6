@@ -1,5 +1,4 @@
 import express from 'express';
-import {userInfo} from '../class/userInfo';
 import {db_mysql} from '../db/dbconnect';
 
 
@@ -36,13 +35,14 @@ router.post('/', (req, res) => {
     let query = '';
     let query2 = '';
     if (data.handler === 1){//add
-        query = 'insert into '
+        query = 'insert into  user (user_name, user_pwd, user_phone, user_role) values ( \' ' + data.user_name + '\', \'123456\', \''+ data.user_phone +'\',1)'
     }else if(data.handler ===2){// login
         query = 'select * from user where user_phone = \'' + data.user_name +'\' and user_pwd = \'' + data.user_pwd + '\'';
         query2 = 'update user set login_time = NOW() where user_id = '
-
     }else if (data.handler ===3) {//update
-        query = 'update user set user_name = ' + data.user_name + ', user_pwd = ' +data.user_pwd + ', user_role = ' + data.role + 'where user_id =' + data.user_id
+        query = 'update user set user_name = ' + data.user_name + ', user_pwd = ' +data.user_pwd + ', user_role = ' + data.role + 'where user_id =' + data.user_id;
+    }else if (data.handler ===4) {// search
+        query = 'select * from user where user_name = \''+ data.user_name +'\' or user_phone = \''+data.user_name+' \'';
 
     }else {// delete
         query = 'delete from user where user_id =' + data.user_id

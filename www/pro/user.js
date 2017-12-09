@@ -4,8 +4,6 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _userInfo = require('../class/userInfo');
-
 var _dbconnect = require('../db/dbconnect');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -43,7 +41,7 @@ router.post('/', function (req, res) {
     var query2 = '';
     if (data.handler === 1) {
         //add
-        query = 'insert into ';
+        query = 'insert into  user (user_name, user_pwd, user_phone, user_role) values ( \' ' + data.user_name + '\', \'123456\', \'' + data.user_phone + '\',1)';
     } else if (data.handler === 2) {
         // login
         query = 'select * from user where user_phone = \'' + data.user_name + '\' and user_pwd = \'' + data.user_pwd + '\'';
@@ -51,6 +49,9 @@ router.post('/', function (req, res) {
     } else if (data.handler === 3) {
         //update
         query = 'update user set user_name = ' + data.user_name + ', user_pwd = ' + data.user_pwd + ', user_role = ' + data.role + 'where user_id =' + data.user_id;
+    } else if (data.handler === 4) {
+        // search
+        query = 'select * from user where user_name = \'' + data.user_name + '\' or user_phone = \'' + data.user_name + ' \'';
     } else {
         // delete
         query = 'delete from user where user_id =' + data.user_id;
