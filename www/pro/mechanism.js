@@ -43,7 +43,7 @@ router.post('/insert', function (req, res) {
 
 router.post('/update', function (req, res) {
     var data = req.body;
-    var str = 'update mechanism set mechanism_name = \'' + data.mechanism_name + '\', mechanism_src = \'' + data.mechanism_src + '\', mechanism_desc = \'' + data.mechanism_desc + '\'';
+    var str = 'update mechanism set mechanism_name = \'' + data.mechanism_name + '\', mechanism_src = \'' + data.mechanism_src + '\', mechanism_desc = \'' + data.mechanism_desc + '\' where mechanism_id = ' + data.mechanism_id;
     (0, _dbconnect.db_mysql)(str).then(function (value) {
         res.send(value);
     });

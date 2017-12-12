@@ -35,7 +35,7 @@ router.post('/insert', (req, res) => {
 
 router.post('/update', (req, res) => {
     const data = req.body;
-    const str = 'update mechanism set mechanism_name = \''+ data.mechanism_name +'\', mechanism_src = \''+data.mechanism_src+'\', mechanism_desc = \''+data.mechanism_desc+'\'';
+    const str = 'update mechanism set mechanism_name = \''+ data.mechanism_name +'\', mechanism_src = \''+data.mechanism_src+'\', mechanism_desc = \''+data.mechanism_desc+'\' where mechanism_id = ' + data.mechanism_id;
     db_mysql(str).then((value)=> {
         res.send(value);
     });
