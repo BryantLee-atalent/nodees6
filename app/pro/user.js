@@ -59,11 +59,12 @@ router.post('/', (req, res) => {
     });
 
     promise.then((value) => {
+
         if (query2) {
             const promise2 = new Promise((resolve, reject) => {
                 // str += 'select count(1) from user'
                 const str = query2 + value[0].user_id;
-                console.log(value);
+
                 let dbc = db_mysql(str);
 
                 resolve(dbc);

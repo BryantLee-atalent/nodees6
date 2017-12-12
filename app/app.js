@@ -18,7 +18,7 @@ app.use(logger('dev'));
 app.use(bodyParser.raw());
 app.use(bodyParser.text());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false }));
+app.use(bodyParser.urlencoded({limit: '50mb' ,extended: false }));
 app.use(cookieParser());
 // 设置跨域访问
 app.all('*', function(req, res, next) {
