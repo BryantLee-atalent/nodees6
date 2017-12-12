@@ -17,7 +17,7 @@ let app = express();
 app.use(logger('dev'));
 app.use(bodyParser.raw());
 app.use(bodyParser.text());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50000kb'}));
 app.use(bodyParser.urlencoded({limit: '50mb' ,extended: false }));
 app.use(cookieParser());
 // 设置跨域访问

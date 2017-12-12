@@ -55,7 +55,7 @@ var app = (0, _express2.default)();
 app.use((0, _morgan2.default)('dev'));
 app.use(_bodyParser2.default.raw());
 app.use(_bodyParser2.default.text());
-app.use(_bodyParser2.default.json());
+app.use(_bodyParser2.default.json({ limit: '50000kb' }));
 app.use(_bodyParser2.default.urlencoded({ limit: '50mb', extended: false }));
 app.use((0, _cookieParser2.default)());
 // 设置跨域访问
