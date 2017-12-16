@@ -3,23 +3,64 @@ import {db_mysql} from '../db/dbconnect';
 let router = express.Router();
 
 // https get
-router.get('/', (req, res) => {
-    const str = 'select * from index_image where image_handler = 1';
+router.get('/:sta', (req, res) => {
+    const str = 'select * from forms where forms_status = ' + req.params.sta;
     db_mysql(str).then((value)=> {
         res.send(value);
     });
 });
 
 // https post
-router.post('/', (req, res) => {
-    const data = req.body.imageData;
-    const str = 'update index_image set image_handler = 0';
+router.post('/sta', (req, res) => {
+    const data = req.body;
+    const str = 'update forms set forms_status =  '+ data.forms_status +' where forms_id = ' + data.forms_id;
     db_mysql(str).then((value)=> {
-        const addStr = 'insert into index_image (image_src, image_handler) values( \' '+  data +'\', 1)';
-        db_mysql(addStr).then((value2)=> {
-            res.send(value2);
-        });
+        res.send(value);
     });
 });
+
+router.post('/insert', (req, res) => {
+    const data = req.body;
+    const str = 'insert into forms(forms_name, forms_desc) values(\''+data.forms_name+'\', \''+data.forms_desc+'\')';
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+router.post('/delete', (req, res) => {
+    const data = req.body;
+    const str = 'delete  from forms where forms_id = ' + data.forms_id;
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+router.post('/update', (req, res) => {
+    const data = req.body;
+    const str = 'update forms set forms_name = \''+ data.forms_name +'\', forms_desc = \''+data.forms_desc+'\' where forms_id = ' + data.forms_id;
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+router.post('/addTicket', (req, res) => {
+    const data = req.body;
+    const str = 'update forms set small_count = (small_count + 1) where forms_id = ' + data.forms_id;
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+router.post('/jTicket', (req, res) => {
+    const data = req.body;
+    const str = 'update forms set small_count = (small_count - 1) where forms_id = ' + data.forms_id;
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+
+
+
 
 module.exports = router;
