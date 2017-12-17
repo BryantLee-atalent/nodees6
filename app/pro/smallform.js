@@ -19,14 +19,11 @@ router.post('/sta', (req, res) => {
 });
 
 // https post
-router.post('/', (req, res) => {
-    const data = req.body.imageData;
-    const str = 'update index_image set image_handler = 0';
+router.post('/update', (req, res) => {
+    const data = req.body;
+    const str = 'update small set small_icon = \''+data.small_icon+'\', small_banner = \''+data.small_banner+'\', small_desc = \''+data.small_desc+'\', small_url= \''+data.small_url+'\',\''+data.small_name+'\',mechanism_ids = \''+data.mechanism_ids+'\', small_endtime = \''+data.small_endtime+'\', small_datetime = \''+data.small_datetime+'\' where small_id = '+data.small_id;
     db_mysql(str).then((value)=> {
-        const addStr = 'insert into index_image (image_src, image_handler) values( \' '+  data +'\', 1)';
-        db_mysql(addStr).then((value2)=> {
-            res.send(value2);
-        });
+        res.send(value);
     });
 });
 
@@ -38,5 +35,23 @@ router.post('/delete', (req, res) => {
         res.send(value);
     });
 });
+
+
+router.post('/insert', (req, res) => {
+    const data = req.body;
+    const str = 'insert into small(small_icon,small_banner,small_desc,small_url,small_name,mechanism_ids, small_datetime, small_endtime) values(\''+data.small_icon+'\',\''+data.small_banner+'\', \''+data.small_desc+'\',\''+data.small_url+'\',\''+data.small_name+'\',\''+data.mechanism_ids+'\', small_datetime = \''+data.small_datetime+'\', small_endtime = \''+data.small_endtime+'\')'
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+router.post('/vote', (req, res) => {
+    const data = req.body;
+    const str = 'update small set small_vote = '+ data.small_vote +'where small_id = '+data.small_id;
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
 
 module.exports = router;

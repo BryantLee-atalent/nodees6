@@ -27,20 +27,33 @@ router.post('/sta', function (req, res) {
 });
 
 // https post
-router.post('/', function (req, res) {
-    var data = req.body.imageData;
-    var str = 'update index_image set image_handler = 0';
+router.post('/update', function (req, res) {
+    var data = req.body;
+    var str = 'update small set small_icon = \'' + data.small_icon + '\', small_banner = \'' + data.small_banner + '\', small_desc = \'' + data.small_desc + '\', small_url= \'' + data.small_url + '\',\'' + data.small_name + '\',mechanism_ids = \'' + data.mechanism_ids + '\', small_endtime = \'' + data.small_endtime + '\', small_datetime = \'' + data.small_datetime + '\' where small_id = ' + data.small_id;
     (0, _dbconnect.db_mysql)(str).then(function (value) {
-        var addStr = 'insert into index_image (image_src, image_handler) values( \' ' + data + '\', 1)';
-        (0, _dbconnect.db_mysql)(addStr).then(function (value2) {
-            res.send(value2);
-        });
+        res.send(value);
     });
 });
 
 router.post('/delete', function (req, res) {
     var data = req.body;
     var str = 'delete  small forms where small_id = ' + data.small_id;
+    (0, _dbconnect.db_mysql)(str).then(function (value) {
+        res.send(value);
+    });
+});
+
+router.post('/insert', function (req, res) {
+    var data = req.body;
+    var str = 'insert into small(small_icon,small_banner,small_desc,small_url,small_name,mechanism_ids, small_datetime, small_endtime) values(\'' + data.small_icon + '\',\'' + data.small_banner + '\', \'' + data.small_desc + '\',\'' + data.small_url + '\',\'' + data.small_name + '\',\'' + data.mechanism_ids + '\', small_datetime = \'' + data.small_datetime + '\', small_endtime = \'' + data.small_endtime + '\')';
+    (0, _dbconnect.db_mysql)(str).then(function (value) {
+        res.send(value);
+    });
+});
+
+router.post('/vote', function (req, res) {
+    var data = req.body;
+    var str = 'update small set small_vote = ' + data.small_vote + 'where small_id = ' + data.small_id;
     (0, _dbconnect.db_mysql)(str).then(function (value) {
         res.send(value);
     });
