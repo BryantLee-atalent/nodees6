@@ -3,8 +3,16 @@ import {db_mysql} from '../db/dbconnect';
 let router = express.Router();
 
 // https get
-router.get('/', (req, res) => {
-    const str = 'select * from index_image where image_handler = 1';
+router.get('/:sta', (req, res) => {
+    const str = 'select * from small where small_status = ' + req.params.sta;
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+router.post('/sta', (req, res) => {
+    const data = req.body;
+    const str = 'update small set small_status =  '+ data.small_status +' where small_id = ' + data.small_id;
     db_mysql(str).then((value)=> {
         res.send(value);
     });
@@ -19,6 +27,15 @@ router.post('/', (req, res) => {
         db_mysql(addStr).then((value2)=> {
             res.send(value2);
         });
+    });
+});
+
+
+router.post('/delete', (req, res) => {
+    const data = req.body;
+    const str = 'delete  small forms where small_id = ' + data.small_id;
+    db_mysql(str).then((value)=> {
+        res.send(value);
     });
 });
 

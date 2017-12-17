@@ -22,6 +22,7 @@ router.post('/sta', (req, res) => {
 router.post('/insert', (req, res) => {
     const data = req.body;
     const str = 'insert into forms(forms_name, forms_desc) values(\''+data.forms_name+'\', \''+data.forms_desc+'\')';
+    console.log(str);
     db_mysql(str).then((value)=> {
         res.send(value);
     });
@@ -54,6 +55,14 @@ router.post('/addTicket', (req, res) => {
 router.post('/jTicket', (req, res) => {
     const data = req.body;
     const str = 'update forms set small_count = (small_count - 1) where forms_id = ' + data.forms_id;
+    db_mysql(str).then((value)=> {
+        res.send(value);
+    });
+});
+
+router.post('/all', (req, res) => {
+    const data = req.body;
+    const str = 'select * from forms';
     db_mysql(str).then((value)=> {
         res.send(value);
     });
