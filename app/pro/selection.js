@@ -12,7 +12,7 @@ router.get('', (req, res) => {
 });
 
 // https post
-router.post('/vote', (req, res) => {
+router.post('', (req, res) => {
     const data = req.body;
     const str = 'update mechanism set mechanism_ticket = '+ data.ticket +' where mechanism_id ='+data.mechanism_id;
     db_mysql(str).then((value)=> {
