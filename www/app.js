@@ -32,6 +32,10 @@ var _selection = require('./pro/selection');
 
 var _selection2 = _interopRequireDefault(_selection);
 
+var _phone = require('./pro/phone');
+
+var _phone2 = _interopRequireDefault(_phone);
+
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -75,6 +79,7 @@ app.use('/form', _form2.default);
 app.use('/smallform', _smallform2.default);
 app.use('/signup', _signup2.default);
 app.use('/selection', _selection2.default);
+app.use('/phone', _phone2.default);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

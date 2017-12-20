@@ -7,6 +7,7 @@ import index from './pro/index';
 import smallform from './pro/smallform';
 import signup from './pro/signup';
 import selection from './pro/selection';
+import phone from './pro/phone';
 
 import bodyParser from 'body-parser';
 import logger from 'morgan';
@@ -37,6 +38,7 @@ app.use('/form',form);
 app.use('/smallform',smallform);
 app.use('/signup',signup);
 app.use('/selection',selection);
+app.use('/phone',phone);
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
