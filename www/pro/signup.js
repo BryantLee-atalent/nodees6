@@ -26,7 +26,7 @@ router.get('/:sta', function (req, res) {
 // https post
 router.post('/status', function (req, res) {
     var data = req.body;
-    var str = 'update signup set mechanism_status = ' + data.status + ', mechanism_reson = \'' + data.reson + '\'';
+    var str = 'update mechanism set mechanism_status = ' + data.status + ', mechanism_reson = \'' + data.reson + '\'';
     (0, _dbconnect.db_mysql)(str).then(function (value) {
         res.send(value);
     });
