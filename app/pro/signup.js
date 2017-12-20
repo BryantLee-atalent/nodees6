@@ -18,7 +18,7 @@ router.get('/:sta', (req, res) => {
 // https post
 router.post('/status', (req, res) => {
     const data = req.body;
-    const str = 'update mechanism set mechanism_status = '+ data.status +', mechanism_reson = \''+data.reson+'\'';
+    const str = 'update mechanism set mechanism_status = '+ data.status +', mechanism_reson = \''+data.reson+'\' where mechanism_id = ' +data.id;
     db_mysql(str).then((value)=> {
         res.send(value)
     });
