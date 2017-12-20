@@ -49,7 +49,7 @@ router.post('/forms_small', (req, res) => {
 // https post
 router.post('/mechanism_apply', (req, res) => {
     const data = req.body;
-    const str = 'insert into mechanism(mechanism_name, mechanism_src, mechanism_desc,mechanism_phone,mechanism_date) values (\'' + data.mechanism_name + '\',\'' +data.mechanism_src +'\',\'' + data.mechanism_desc+ '\', \''+data.mechanism_phone+'\', \''+data.mechanism_date+'\')';
+    const str = 'insert into mechanism(mechanism_name, mechanism_src, mechanism_desc,mechanism_phone,mechanism_date,small_id) values (\'' + data.mechanism_name + '\',\'' +data.mechanism_src +'\',\'' + data.mechanism_desc+ '\', \''+data.mechanism_phone+'\', \''+data.mechanism_date+'\', '+data.small_id+')';
     db_mysql(str).then((value)=> {
         res.send(value);
     });

@@ -59,7 +59,7 @@ router.post('/forms_small', function (req, res) {
 // https post
 router.post('/mechanism_apply', function (req, res) {
     var data = req.body;
-    var str = 'insert into mechanism(mechanism_name, mechanism_src, mechanism_desc,mechanism_phone,mechanism_date) values (\'' + data.mechanism_name + '\',\'' + data.mechanism_src + '\',\'' + data.mechanism_desc + '\', \'' + data.mechanism_phone + '\', \'' + data.mechanism_date + '\')';
+    var str = 'insert into mechanism(mechanism_name, mechanism_src, mechanism_desc,mechanism_phone,mechanism_date,small_id) values (\'' + data.mechanism_name + '\',\'' + data.mechanism_src + '\',\'' + data.mechanism_desc + '\', \'' + data.mechanism_phone + '\', \'' + data.mechanism_date + '\', ' + data.small_id + ')';
     (0, _dbconnect.db_mysql)(str).then(function (value) {
         res.send(value);
     });
