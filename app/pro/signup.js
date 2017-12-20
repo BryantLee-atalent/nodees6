@@ -4,7 +4,12 @@ let router = express.Router();
 
 // https get
 router.get('/:sta', (req, res) => {
-    const str = 'select * from signup where mechanism = '+req.params.sta;
+    let str = ''
+    if (req.params.sta === 0) {
+        str = 'select * from mechanism where mechanism_status = '+req.params.sta; ;
+    }else {
+        str = 'select * from mechanism where mechanism_status != '+req.params.sta;
+    }
     db_mysql(str).then((value)=> {
         res.send(value);
     });

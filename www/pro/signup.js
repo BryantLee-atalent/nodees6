@@ -12,7 +12,12 @@ var router = _express2.default.Router();
 
 // https get
 router.get('/:sta', function (req, res) {
-    var str = 'select * from signup where mechanism = ' + req.params.sta;
+    var str = '';
+    if (req.params.sta === 0) {
+        str = 'select * from mechanism where mechanism_status = ' + req.params.sta;;
+    } else {
+        str = 'select * from mechanism where mechanism_status != ' + req.params.sta;
+    }
     (0, _dbconnect.db_mysql)(str).then(function (value) {
         res.send(value);
     });
