@@ -5,8 +5,8 @@ let router = express.Router();
 // https get
 router.get('/:sta', (req, res) => {
     let str = ''
-    if (req.params.sta === 0) {
-        str = 'select * from mechanism where mechanism_status = '+req.params.sta; ;
+    if (req.params.sta == 0) {
+        str = 'select * from mechanism where mechanism_status = '+req.params.sta;
     }else {
         str = 'select * from mechanism where mechanism_status != '+req.params.sta;
     }

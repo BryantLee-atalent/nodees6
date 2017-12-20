@@ -13,8 +13,8 @@ var router = _express2.default.Router();
 // https get
 router.get('/:sta', function (req, res) {
     var str = '';
-    if (req.params.sta === 0) {
-        str = 'select * from mechanism where mechanism_status = ' + req.params.sta;;
+    if (req.params.sta == 0) {
+        str = 'select * from mechanism where mechanism_status = ' + req.params.sta;
     } else {
         str = 'select * from mechanism where mechanism_status != ' + req.params.sta;
     }
