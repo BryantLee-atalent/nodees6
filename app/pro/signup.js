@@ -8,7 +8,7 @@ router.get('/:sta', (req, res) => {
     if (req.params.sta == 0) {
         str = 'select * from mechanism where mechanism_status = '+req.params.sta;
     }else {
-        str = 'select * from mechanism where mechanism_status != '+req.params.sta;
+        str = 'select * from mechanism where mechanism_status != 0';
     }
     db_mysql(str).then((value)=> {
         res.send(value);

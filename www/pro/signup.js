@@ -16,7 +16,7 @@ router.get('/:sta', function (req, res) {
     if (req.params.sta == 0) {
         str = 'select * from mechanism where mechanism_status = ' + req.params.sta;
     } else {
-        str = 'select * from mechanism where mechanism_status != ' + req.params.sta;
+        str = 'select * from mechanism where mechanism_status != 0';
     }
     (0, _dbconnect.db_mysql)(str).then(function (value) {
         res.send(value);
