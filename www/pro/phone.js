@@ -91,10 +91,20 @@ router.post('/mechanism', function (req, res) {
 
 router.post('/ticket', function (req, res) {
     var data = req.body;
-    var str = 'update  mechanism set mechanism_ticket = ' + data.mechanism_ticket + 'where mechanism_id = ' + data.mechanism_id;
-    (0, _dbconnect.db_mysql)(str).then(function (value) {
-        res.send(value);
+    var name = req.body.userName;
+    var userStr = 'select * from ticket where ticket_name = \'' + name + '\'';
+    var str = 'update  mechanism set mechanism_ticket = ' + data.mechanism_ticket + ' where mechanism_id = ' + data.mechanism_id;
+
+    (0, _dbconnect.db_mysql)(userStr).then(function (result) {
+        if (result.length > 0) {
+            res.send('重复投票');
+        } else {
+            (0, _dbconnect.db_mysql)(str).then(function (value) {
+                res.send(value);
+            });
+        }
     });
+    // console.log(str);
 });
 
 module.exports = router;
