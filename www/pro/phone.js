@@ -48,7 +48,7 @@ router.post('/forms_small', function (req, res) {
 });
 
 // 根据分榜单查询机构
-router.post('/forms_small', function (req, res) {
+router.post('/forms_mechanism', function (req, res) {
     var data = req.body;
     var str = 'select *  from mechanism where small_id = ' + data.small_id + ' order by mechanism_ticket desc limit 3 \n';
     (0, _dbconnect.db_mysql)(str).then(function (value) {
