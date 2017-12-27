@@ -72,6 +72,7 @@ app.all('*', function (req, res, next) {
     else next();
 });
 
+app.use(_express2.default.static('static/images'));
 app.use('/user', _user2.default);
 app.use('/index', _index2.default);
 app.use('/mechanism', _mechanism2.default);

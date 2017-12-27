@@ -31,6 +31,7 @@ app.all('*', function(req, res, next) {
     else  next();
 });
 
+app.use(express.static('static/images'));
 app.use('/user',user);
 app.use('/index',index);
 app.use('/mechanism',mechanism);

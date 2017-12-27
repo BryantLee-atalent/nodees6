@@ -4,6 +4,10 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
 var _dbconnect = require('../db/dbconnect');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -43,9 +47,18 @@ router.post('/insert', function (req, res) {
 
 router.post('/update', function (req, res) {
     var data = req.body;
-    var str = 'update mechanism set mechanism_name = \'' + data.mechanism_name + '\', mechanism_src = \'' + data.mechanism_src + '\', mechanism_desc = \'' + data.mechanism_desc + '\' where mechanism_id = ' + data.mechanism_id;
-    (0, _dbconnect.db_mysql)(str).then(function (value) {
-        res.send(value);
+    //过滤data:URL
+    var base64Data = data.mechanism_src.replace(/^data:image\/\w+;base64,/, "");
+    var dataBuffer = new Buffer(base64Data, 'base64');
+    _fs2.default.writeFile(Date.now() + ".png", dataBuffer, function (err) {
+        if (err) {
+            res.send(err);
+        } else {
+            var str = 'update mechanism set mechanism_name = \'' + data.mechanism_name + '\', mechanism_src = \'' + dataBuffer + '\', mechanism_desc = \'' + data.mechanism_desc + '\' where mechanism_id = ' + data.mechanism_id;
+            (0, _dbconnect.db_mysql)(str).then(function (value) {
+                res.send(value);
+            });
+        }
     });
 });
 
